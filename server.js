@@ -2,13 +2,12 @@ const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT ?? 3001;
 const app = express();
-const uuid = require('./helpers/uuid')
+const uuid = require('./helpers/uuid');
 const fs = require('fs');
+const savedNotes = require('./db/db.json');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
 app.use(express.static('public'));
 
 
@@ -18,7 +17,8 @@ app.get('/notes', (req, res) => {
 
 app.get('/api/notes', (req, res) => {
     // res.json(`${req.method} request received to get notes`);
-    console.info(`${req.method} request received to get notes`);
+    // console.info(`${req.method} request received to get notes`);
+    res.json(savedNotes);
 });
 
 app.post('/api/notes', (req, res) => {
@@ -43,7 +43,7 @@ app.post('/api/notes', (req, res) => {
             ? console.error(err)
             : console.log(`Note has been written to JSON file`));
     }
-})
+});
 
 // wildcard listener HAS TO BE BELOW other requests or it trumps any other request
 app.get('*', (req, res) => {
