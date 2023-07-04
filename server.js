@@ -30,7 +30,7 @@ app.post('/api/notes', (req, res) => {
         const newNote = {
             title,
             text,
-            note_id: uuid(),
+            id: uuid(),
         };
 
         let orig = fs.readFileSync('./db/db.json');
@@ -50,6 +50,10 @@ app.get('*', (req, res) => {
     return res.sendFile(path.join(__dirname, 'public/index.html'))
 });
 
+app.delete('/api/notes/:id', (req, res) => {
+    console.info(`delete req received for ${req.body}`);
+    res.json('delete request received, this should be in insomnia');
+});
 
 
 app.listen(PORT, () => {
