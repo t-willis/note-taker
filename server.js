@@ -51,8 +51,28 @@ app.get('*', (req, res) => {
 });
 
 app.delete('/api/notes/:id', (req, res) => {
-    console.info(`delete req received for ${req.body}`);
+    const { id } = req.params;
+    console.info(`delete req received for ${id}`);
     res.json('delete request received, this should be in insomnia');
+
+    let origSaved = fs.readFileSync('./db/db.json');
+    let delNotes = JSON.parse(origSaved);
+
+    for (let i = 0; i < delNotes.length; i++) {
+        if (delNotes[i].id === id) {
+            delNotes.splice(i, 1);
+            postDel = JSON.stringify(delNotes);
+            console.info(delNotes);
+            
+            fs.writeFile('./db/db.json', postDel, (err) =>
+            err
+                ? console.error(err)
+                : console.log('note has been deleted yay'));
+            return;
+        }
+        
+    }
+
 });
 
 
