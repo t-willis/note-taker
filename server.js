@@ -4,7 +4,6 @@ const PORT = process.env.PORT ?? 3001;
 const app = express();
 const uuid = require('./helpers/uuid');
 const fs = require('fs');
-// const savedNotes = require('./db/db.json');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -16,8 +15,6 @@ app.get('/notes', (req, res) => {
 });
 
 app.get('/api/notes', (req, res) => {
-    // res.json(`${req.method} request received to get notes`);
-    // console.info(`${req.method} request received to get notes`);
     let orig = fs.readFileSync('./db/db.json');
     const notes = JSON.parse(orig);
     res.json(notes);
@@ -63,12 +60,11 @@ app.delete('/api/notes/:id', (req, res) => {
         if (delNotes[i].id === id) {
             delNotes.splice(i, 1);
             postDel = JSON.stringify(delNotes);
-            console.info(delNotes);
             
             fs.writeFile('./db/db.json', postDel, (err) =>
             err
             ? console.error(err)
-            : console.log('note has been deleted yay'));
+            : console.log('note has been successfully deleted'));
             return;
         }
         
