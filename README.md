@@ -23,7 +23,8 @@ To run the application you'll need to do the following:
 
 ## Usage
 
-A short video demonstration can be found here: HAVENT DONE THIS YET
+A short video demonstration can be found here: [Click here!](https://drive.google.com/file/d/1MEsm-wa6DH8qMpOMDJ-SR2c6o15uPMUT/view)
+
 
 After visiting the deployed url or running the server locally using node there are a few base functions available to users.
 
