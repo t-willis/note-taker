@@ -6,9 +6,11 @@ const app = express();
 const uuid = require('./helpers/uuid');
 const fs = require('fs');
 
-// middle-ware
+// middle-ware to accept data from the user
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// middle-ware to declare static directory
 app.use(express.static('public'));
 
 // get for the /notes url path from public folder
